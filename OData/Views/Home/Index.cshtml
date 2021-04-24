@@ -1,0 +1,58 @@
+﻿@using System.Globalization
+@model OData.ViewModels.EmployeeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="mb-3">
+    <form asp-action="Index" method="get">
+        <div class="input-group w-25">
+            <input asp-for="SearchPhrase" placeholder="Enter first or last name" class="form-control">
+            <button class="btn btn-secondary input-group-text">Szukaj</button>
+        </div>
+    </form>
+</div>
+<table class="table table-striped table-bordered w-100">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LastNameSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("City", "Index", new { sortOrder = ViewBag.CitySortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Country", "Index", new { sortOrder = ViewBag.CountrySortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Address", "Index", new { sortOrder = ViewBag.AddressSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Birth Date", "Index", new { sortOrder = ViewBag.BirthSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Hire Date", "Index", new { sortOrder = ViewBag.HireSortParm })
+                </th>
+            </tr>
+        </thead>
+    
+        @foreach (var item in Model.Employees)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Title</td>
+                <td>@item.City</td>
+                <td>@item.Country</td>
+                <td>@item.Address</td>
+                <td>@item.BirthDate.GetValueOrDefault().ToString("dd-MM-yyyy")</td>
+                <td>@item.HireDate.GetValueOrDefault().ToString("dd-MM-yyyy")</td>
+            </tr>
+        }
+</table>
